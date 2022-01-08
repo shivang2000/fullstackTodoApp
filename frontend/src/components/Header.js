@@ -5,7 +5,7 @@ const Header = () => {
     return (
         <HeaderConatiner>
             <HeaderItem>
-                <h2>ToDO App</h2>
+                <h2>TODO App</h2>
             </HeaderItem>
             <HeaderItem>
                 <h2>Login</h2>
