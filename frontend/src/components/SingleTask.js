@@ -6,7 +6,7 @@ const SingleTask = () => {
     return (
         <SingleTaskContainer>
             <div>here are your task to be done</div>
-            <Switch />
+            <DeleteButton>Delete Task</DeleteButton>
         </SingleTaskContainer>
     )
 }
@@ -19,3 +19,12 @@ const SingleTaskContainer = styled.div`
     padding: 0.5rem;
     align-items: center;
 `
+
+const DeleteButton = styled.button`
+    background: rgb(60,60,60);
+    color: rgb(174,193,198);
+    border-radius: .5rem;
+    text-align: center;
+    display: flex;
+    font-size: 1.5rem;
+` 

@@ -18,13 +18,12 @@ export default Header;
 
 const HeaderConatiner = styled.div`
     display: flex;
-    width: 100vw;
     justify-content: space-between;
     align-item: center;
-    margin: 1rem;
+    padding: .5rem;
 `
 const HeaderItem = styled.div`
     display: flex;
     align-items: center;
-    padding
+    padding: auto
 `
