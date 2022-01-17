@@ -26,4 +26,4 @@ frontend/yarn-debug.log*
 frontend/yarn-error.log*
 
 # django .pyc files
-backend/*.pyc
+*/*.pyc
