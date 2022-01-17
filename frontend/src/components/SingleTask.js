@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-// import Switch from '../Styled-Component/Switch';
 
 const SingleTask = () => {
     return (

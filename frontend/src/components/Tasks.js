@@ -1,8 +1,26 @@
 import React from 'react'
+import { useSelector } from 'react-redux';
 import styled from 'styled-components';
+import { selectTasksResult, useGetTasksQuery } from '../redux/taskApi';
+// import { useGetTaskQuery } from '../redux/taskApi';
 import SingleTask from './SingleTask';
 
 const Tasks = () => {
+
+    const tasks1 = useSelector(selectTasksResult)
+    console.log(tasks1)
+
+    const {data: tasks = [], isLoading, isSuccess, isError, error} = useGetTasksQuery()
+
+    if (isSuccess){
+        console.log(tasks)
+        return (
+            <TasksContainer>
+                <SingleTask />
+            </TasksContainer>
+        )
+    }
+
     return (
         <TasksContainer>
             <SingleTask />
