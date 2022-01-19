@@ -1,11 +1,21 @@
 import React from 'react';
 import styled from 'styled-components';
+import { useDeleteTaskMutation } from '../redux/taskApi';
 
-const SingleTask = () => {
+const SingleTask = ({ task }) => {
+    
+    const [deleteTask, {isLoading: isDeleting}] = useDeleteTaskMutation()
+
+    const handleOnDelete = () => {
+        deleteTask({
+            taskId: task.id
+        })
+    }
+
     return (
         <SingleTaskContainer>
-            <div>here are your task to be done</div>
-            <DeleteButton>Delete Task</DeleteButton>
+            <div>{task.whattodo}</div>
+            <DeleteButton onClick={handleOnDelete} disabled={isDeleting}>{isDeleting ? 'deleting' : 'delete'}</DeleteButton>
         </SingleTaskContainer>
     )
 }

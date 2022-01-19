@@ -4,14 +4,34 @@ export const taskApi = baseApi.injectEndpoints({
     endpoints: builder => ({
       getTasks: builder.query({
         query: () => '/todo/',
-        method: 'GET'
+        providesTags: ['Task']
+      }),
+      createTask: builder.mutation({
+        query: ( task ) => ({
+          url: '/todo/',
+          method: 'POST',
+          body: task,
+        }),
+        transformResponse: (res) => (console.log(res)),
+        invalidatesTags: ['Task']
+      }),
+      deleteTask: builder.mutation({
+        query: ({taskId}) => ({
+          url: `/todo/${taskId}`,
+          method: 'DELETE',
+        }),
+        invalidatesTags: ['Task']
       })
     })
   })
   
 
 
-export const { useGetTasksQuery } = taskApi
+export const { 
+  useGetTasksQuery,
+  useCreateTaskMutation,
+  useDeleteTaskMutation
+} = taskApi
 
 export const selectTasksResult = taskApi.endpoints.getTasks.select()
 
