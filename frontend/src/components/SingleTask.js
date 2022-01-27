@@ -1,12 +1,31 @@
 import React from 'react';
 import styled from 'styled-components';
-// import Switch from '../Styled-Component/Switch';
+import { useDeleteTaskMutation, useUpdateTaskMutation } from '../redux/taskApi';
 
-const SingleTask = () => {
+const SingleTask = ({ task }) => {
+    console.log(task)
+    const [deleteTask, {isLoading: isDeleting}] = useDeleteTaskMutation()
+    const [updateTask] = useUpdateTaskMutation()
+    const handleOnDelete = () => {
+        deleteTask({
+            taskId: task.id
+        })
+    }
+
+    const handleStatusChange = () => {
+        updateTask({
+            taskId: task.id,
+            body: {
+                'is_completed': !task.is_completed
+            } 
+        })
+    }
+
     return (
         <SingleTaskContainer>
-            <div>here are your task to be done</div>
-            <DeleteButton>Delete Task</DeleteButton>
+            <input type='checkbox' defaultChecked={task.is_completed} onClick={handleStatusChange} />
+            <div>{task.whattodo}</div>
+            <DeleteButton onClick={handleOnDelete} disabled={isDeleting}>{isDeleting ? 'deleting' : 'delete'}</DeleteButton>
         </SingleTaskContainer>
     )
 }
