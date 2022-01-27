@@ -8,7 +8,7 @@ class ToDos(models.Model):
     ]
 
     whattodo = models.CharField(max_length=500, default="")
-    status = models.CharField(max_length=20, choices=STATUSCHOICE, default=STATUSCHOICE[0][0])
+    is_completed = models.BooleanField(default=False)
 
     def __str__(self) :
         return str(self.whattodo)
