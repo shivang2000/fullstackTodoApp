@@ -38,6 +38,7 @@ const TasksContainer = styled.div`
     align-items: space-between;
     justify-content: flex-start;
     margin: auto;
+    margin-bottom: min(2rem)
     padding: 1rem;
     border-radius: 2rem;
     max-width: 85vw ;

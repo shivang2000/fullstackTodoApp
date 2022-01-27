@@ -21,8 +21,16 @@ export const taskApi = baseApi.injectEndpoints({
           method: 'DELETE',
         }),
         invalidatesTags: ['Task']
+      }),
+      updateTask: builder.mutation({
+          query: ({taskId, body}) => ({
+            url: `/todo/${taskId}/`,
+            method: 'PUT',
+            body,
+          }),
+          invalidatesTags: ['Task']
+        })
       })
-    })
   })
   
 
@@ -30,6 +38,7 @@ export const taskApi = baseApi.injectEndpoints({
 export const { 
   useGetTasksQuery,
   useCreateTaskMutation,
+  useUpdateTaskMutation,
   useDeleteTaskMutation
 } = taskApi
 
