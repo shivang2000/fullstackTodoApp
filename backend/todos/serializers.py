@@ -4,5 +4,5 @@ from .models import ToDos
 class ToDosSerializer(serializers.ModelSerializer):
     class Meta:
         model = ToDos
-        fields = '__all__'
-
+        # fields = '__all__'
+        exclude = ['user']
