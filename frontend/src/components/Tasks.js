@@ -1,18 +1,24 @@
 import React from 'react'
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
-import { selectTasksResult, useGetTasksQuery } from '../redux/taskApi';
+import {  useGetTasksQuery } from '../redux/taskApi';
 import AddTask from './AddTask';
 import LoadingSpinner from './LoadingSpinner';
-// import { useGetTaskQuery } from '../redux/taskApi';
 import SingleTask from './SingleTask';
+import { useNavigate } from 'react-router-dom';
+import { selectUser } from '../redux/authSlice';
+import { useDispatch } from 'react-redux';
 
 const Tasks = () => {
 
-    const tasks1 = useSelector(selectTasksResult)
-    console.log(tasks1)
+    const navigate = useNavigate()
 
-    const {data: tasks = [], isLoading, isSuccess, isError, error} = useGetTasksQuery()
+    const user = useSelector(selectUser)    
+    if (!user) {
+        navigate('/login')
+    }
+    const skip = user ? true : false
+    const {data: tasks = [], isLoading, isSuccess} = useGetTasksQuery({skip})
     
 
     let content

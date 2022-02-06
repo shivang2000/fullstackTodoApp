@@ -5,6 +5,16 @@ export const baseApi = createApi({
     tagTypes: ['Task'],
     baseQuery: fetchBaseQuery({
         baseUrl: 'http://localhost:8000',
+        prepareHeaders: (headers, { getState }) => {
+            const token = getState().auth.token
+
+            console.log(headers)
+            if (token) {
+                headers.set('authorization', `Bearer ${token}`)
+            }
+
+            return headers
+        }
     }),
     endpoints: builder => ({})
 })

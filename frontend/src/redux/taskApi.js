@@ -4,7 +4,14 @@ export const taskApi = baseApi.injectEndpoints({
     endpoints: builder => ({
       getTasks: builder.query({
         query: () => '/todo/',
-        providesTags: ['Task']
+        providesTags: (result, error, args) => {
+          console.log(result);
+          return (
+            result ? 
+              result.map(({id}) => ({ type: 'Task', id })) :
+              ['task']
+          )
+        }
       }),
       createTask: builder.mutation({
         query: ( task ) => ({
@@ -12,7 +19,6 @@ export const taskApi = baseApi.injectEndpoints({
           method: 'POST',
           body: task,
         }),
-        transformResponse: (res) => (console.log(res)),
         invalidatesTags: ['Task']
       }),
       deleteTask: builder.mutation({
@@ -28,7 +34,7 @@ export const taskApi = baseApi.injectEndpoints({
             method: 'PUT',
             body,
           }),
-          invalidatesTags: ['Task']
+          invalidatesTags: (result, error, args) => [{ type: 'Task', id: args.taskId }]
         })
       })
   })

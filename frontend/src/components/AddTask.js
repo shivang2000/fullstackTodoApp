@@ -4,9 +4,10 @@ import { useCreateTaskMutation } from "../redux/taskApi";
 
 const AddTask = () => {
     const [task, setTask] = useState('')
-    const [createTask, {isLoading}] = useCreateTaskMutation()
+    const [createTask, {isLoading, isSuccess}] = useCreateTaskMutation()
 
-    const handleOnSubmit = async() => {
+    const handleOnSubmit = async(e) => {
+        e.preventDefault()
         await createTask({
             whattodo: task
         })
@@ -14,6 +15,7 @@ const AddTask = () => {
     }
 
     const inputValue = isLoading ? (task + ' Adding your Task') : ''
+    // inputValue = isLoading && isSuccess ? '' : task
 
     return (
         
