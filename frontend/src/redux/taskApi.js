@@ -5,7 +5,7 @@ export const taskApi = baseApi.injectEndpoints({
       getTasks: builder.query({
         query: () => '/todo/',
         providesTags: (result, error, args) => {
-          console.log(result);
+          // console.log(result);
           return (
             result ? 
               result.map(({id}) => ({ type: 'Task', id })) :

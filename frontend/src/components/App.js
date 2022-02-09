@@ -1,20 +1,39 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import styled from 'styled-components';
 import Header from './Header';
 import Tasks from './Tasks';
 import Register from './Register'
 
+import jwt_decode from 'jwt-decode'
 import {
     BrowserRouter as Router,
     Routes,
     Route
 } from 'react-router-dom'
+import { useRefreshMutation } from '../redux/authApi';
 import Login from './Login';
+import { useDispatch } from 'react-redux';
+import { setCredentials } from '../redux/authSlice';
 
 const App = () => {
 
-    
-    
+    const dispatch = useDispatch()
+
+    const [refresh] = useRefreshMutation({})
+
+    useEffect(() => {
+        const refreshToken = localStorage.getItem('refresh-token') 
+        if (refreshToken){ 
+            refresh({refreshToken}).then(res => {
+                const decodedtoken = jwt_decode(res.data.access)
+                dispatch(setCredentials({
+                    token: res.data.access,
+                    refresh: refreshToken,
+                    username: decodedtoken.username
+                }))
+            })
+        }
+    }, [false])
         
 
     return (

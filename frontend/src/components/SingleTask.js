@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { useDeleteTaskMutation, useUpdateTaskMutation } from '../redux/taskApi';
 
 const SingleTask = ({ task }) => {
-    console.log(task)
+    // console.log(task)
     const [deleteTask, {isLoading: isDeleting}] = useDeleteTaskMutation()
     const [updateTask] = useUpdateTaskMutation()
     const handleOnDelete = () => {

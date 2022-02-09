@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import {  useGetTasksQuery } from '../redux/taskApi';
@@ -14,9 +14,13 @@ const Tasks = () => {
     const navigate = useNavigate()
 
     const user = useSelector(selectUser)    
-    if (!user) {
-        navigate('/login')
-    }
+    
+    useEffect(() => {
+        if (!user) {
+            navigate('/login')
+        }
+    }, [false])
+
     const skip = user ? true : false
     const {data: tasks = [], isLoading, isSuccess} = useGetTasksQuery({skip})
     

@@ -24,11 +24,21 @@ export const authApi = baseApi.injectEndpoints({
                     password
                 },
             })
-        })
+        }),
+        refresh: builder.mutation({
+            query: ({refreshToken}) => ({
+                url: 'authentication/login/token/refresh',
+                method: 'POST',
+                body: {
+                    'refresh': refreshToken,
+                }
+            })
+        }),
     })
 });
 
 export const { 
     useLoginMutation, 
-    useRegisterMutation
+    useRegisterMutation,
+    useRefreshMutation
 } = authApi;

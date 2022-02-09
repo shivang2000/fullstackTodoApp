@@ -1,10 +1,11 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components';
 import { useLoginMutation } from '../redux/authApi';
 import { setCredentials } from '../redux/authSlice';
 import jwt_decode from "jwt-decode";
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { selectUser } from '../redux/authSlice'
 
 const Login = () => {
     const [username, setUsername] = useState('')
@@ -13,6 +14,10 @@ const Login = () => {
     const navigate = useNavigate()
     const dispatch = useDispatch()
     const [login, { isLoading, isError, error }] = useLoginMutation({})
+
+    // console.log(process.env.NODE_ENV)
+    // console.log(process.env.REACT_APP_BACKENDAPIURL)
+    // console.log('asd',process.env.REACT_APP_NAME)
 
     const handleLogin = async (e) => {
         e.preventDefault()
@@ -33,13 +38,21 @@ const Login = () => {
                 refresh: res.data.refresh,
                 username: decodedtoken.username
             }))
+            localStorage.setItem('refresh-token', res.data.refresh)
             navigate('/')
         }).catch(err => {
             console.log('in promise catch',err)
         })
     }
 
-      
+    const user = useSelector(selectUser)    
+
+    useEffect(() => {
+        if (user) {
+            navigate('/')
+        }
+    }, [user])
+
     const renderError = () => {
         if (isError) {
             return <p>{error.data.detail}</p>

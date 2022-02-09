@@ -18,6 +18,7 @@ const Header = () => {
     const handleLogout = () => {
         console.log('logging out')
         dispatch(logout())
+        localStorage.removeItem('refresh-token')
         navigate('/login')  
     }
 
