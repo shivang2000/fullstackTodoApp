@@ -8,10 +8,12 @@ const AddTask = () => {
 
     const handleOnSubmit = async(e) => {
         e.preventDefault()
-        await createTask({
-            whattodo: task
-        })
-        setTask('')
+        if (!isLoading){
+            await createTask({
+                whattodo: task
+            })
+            setTask('')
+        }
     }
 
     const inputValue = isLoading ? (task + ' Adding your Task') : ''
@@ -19,7 +21,7 @@ const AddTask = () => {
 
     return (
         
-        <AddTaskContainer>
+        <AddTaskContainer  >
             <form onSubmit={handleOnSubmit}>
                 <input type='text' value={isLoading ? inputValue : task} onChange={e => setTask(e.target.value)}    />
             </form>

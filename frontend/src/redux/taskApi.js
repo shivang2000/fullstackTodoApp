@@ -9,7 +9,7 @@ export const taskApi = baseApi.injectEndpoints({
           return (
             result ? 
               result.map(({id}) => ({ type: 'Task', id })) :
-              ['task']
+              ['Task']
           )
         }
       }),

@@ -29,11 +29,16 @@ const Tasks = () => {
     if (isLoading && !(tasks.length) ){
         content = (<LoadingSpinner />)
     }else if (isSuccess) {
-        content = (tasks.map(task => <SingleTask task={task} key={task.id} />))
+        if (tasks.length){
+            content = (tasks.map(task => <SingleTask task={task} key={task.id} />))
+        }else {
+            content = <p>No Tasks.</p>
+        }
+        // content = (tasks.map(task => <SingleTask task={task} key={task.id} />))
     }
 
     return (
-        <TasksContainer>
+        <TasksContainer >
             <AddTask />
             {content}
         </TasksContainer>
