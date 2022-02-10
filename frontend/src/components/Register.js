@@ -40,6 +40,7 @@ const Register = () => {
                 password: form.password
             }).then(res => {
                 console.log('res', res)
+                navigate('/login')
             })
         }
     }
